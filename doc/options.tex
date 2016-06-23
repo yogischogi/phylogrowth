@@ -1,0 +1,21 @@
+\section{Command Line Options}
+
+Command line options may be given in arbitrary order.
+Parameters may be specified by using a space or equals sign.
+For example the following options are identical:
+\texttt{-treein=mytree}, \texttt{-treein mytree}.
+
+\begin{description}
+\item[-help] Prints available program options.
+
+\item[-treein] Input filename for phylogenetic tree (.txt).
+\item[-treeout] Output filename for phylogenetic tree in TXT format.
+\item[-csvout] Output filename for histogram data in CSV format.
+\item[-txtout] Output filename for histogram data in TXT format.
+\item[-pngout] Output filename for PNG image.
+	 Needs Gnuplot \cite{Gnuplot} to be installed.
+\item[-step] Step length of histogram intervals in years.
+	Default is 100.
+\item[-subclade] Selects a specific branch of the tree.
+\end{description}
+

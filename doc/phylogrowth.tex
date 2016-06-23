@@ -1,0 +1,34 @@
+% Phylgrowth User Guide
+%
+% For PDF output: pdflatex phylogrowth.tex
+% For HTML output: plastex pyhlogrowth.tex
+%
+% For Graphics:
+% Use PNG format to avoid problems with HTML conversion.
+% Recommended size: < 13cm x 18cm (width x height).
+% Recommended resolution: 300 dpi.
+%
+% Use fixed width instead of textwidth, so that plastex can
+% recognize the graphics size. For example use
+% \includegraphics[width=13cm]{img/haplogroups.png}
+% instead of
+% \includegraphics[width=\textwidth]{img/haplogroups.png}
+
+
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian,english]{babel}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=blue]{hyperref}
+\usepackage{graphicx}
+
+\begin{document}
+\include{title}
+\tableofcontents
+\include{introduction}
+\include{installation}
+\include{options}
+\include{examples}
+\input{references}
+\bibliography{references}
+\addcontentsline{toc}{section}{References}
+\end{document}

@@ -21,7 +21,7 @@ func main() {
 		csvout   = flag.String("csvout", "", "Output filename for histogram data in CSV format.")
 		txtout   = flag.String("txtout", "", "Output filename for histogram data in TXT format.")
 		pngout   = flag.String("pngout", "", "Output filename for PNG image. Needs Gnuplot to be installed.")
-		step     = flag.Int("step", 200, "Step length of histogram intervals in years.")
+		step     = flag.Int("step", 100, "Step length of histogram intervals in years.")
 		subclade = flag.String("subclade", "", "Selects a specific branch of the tree.")
 	)
 	flag.Parse()
