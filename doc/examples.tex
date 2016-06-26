@@ -26,11 +26,13 @@ CTS4528, S1200 TMRCA 5000
 Each line of the tree contains one or more SNPs or a sample
 ID. Subclades and samples are indented by using tabs or spaces.
 Each sample starts with \texttt{id:} followed by the ID.
-If a subclade has a TMRCA estimate Phylogrowth assumes that
-the population growth in a given period of time is proportional
-to the number of child branches.
 
-To create a graph that shows population growth from the example
+If a subclade has a TMRCA estimate Phylogrowth counts the number
+of additional new lineages. As a first rough estimate we assume
+that the number of new lineages is proportional to population
+growth.
+
+To create a graph that shows the new lineages from the example
 tree:
 
 \begin{enumerate}
@@ -44,8 +46,8 @@ tree:
 \begin{figure}[ht]
 \centering
 \includegraphics[width=13cm]{img/example.png}
-\caption{The first example showing time periods of population
-growth.}
+\caption{The first example showing time periods of haplogroup
+expansion.}
 \end{figure}
 
 \pagebreak
@@ -58,8 +60,8 @@ tree \cite{YFullTree}. It's TMRCA estimates are based on SNP
 counting and calibrated by ancient and modern DNA samples
 \cite{YFullMutationRate}.
 
-As a more sophisticated example let us calculate the population
-growth for the P312 haplogroup. P312 is widespread in Western
+As a more sophisticated example let us calculate the number of
+new lineages for the P312 haplogroup. P312 is widespread in Western
 Europe and most common in Spain, France and on the British Isles.
 
 \begin{enumerate}
@@ -78,7 +80,7 @@ Europe and most common in Spain, France and on the British Isles.
 \begin{figure}[ht]
 \centering
 \includegraphics[width=13cm]{img/P312.png}
-\caption{Population growth of the P312 haplogroup.}
+\caption{Number of new lineages of the P312 haplogroup.}
 \end{figure}
 
 

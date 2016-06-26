@@ -92,8 +92,8 @@ func (h *Histogram) WritePNG(filename string, subclade string) error {
 	script := "reset\n" +
 		"set terminal png\n" +
 		"set xlabel \"Years before present\"\n" +
-		"set ylabel \"Population growth\"\n" +
-		"set title \"" + subclade + " Population Growth\"\n" +
+		"set ylabel \"Number of new lineages\"\n" +
+		"set title \"" + subclade + " Lineages\"\n" +
 		"set key below\n" +
 		"set grid\n" +
 		"set xrange[] reverse\n" +

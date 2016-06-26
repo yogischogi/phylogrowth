@@ -48,16 +48,16 @@ func newClade(text string) (Clade, error) {
 	return result, nil
 }
 
-// TMRCAs returns the TMRCAs for all lineages.
+// TMRCAs returns the TMRCAs for all new lineages.
 func (c *Clade) TMRCAs() []float64 {
 	result := make([]float64, 0)
 	if c.TMRCA != 0 {
-		for _, subclade := range c.Subclades {
+		branches := len(c.Subclades) + len(c.Samples)
+		for i := 0; i < branches-1; i++ {
 			result = append(result, c.TMRCA)
-			subclade.appendTMRCAs(&result)
 		}
-		for i := 0; i < len(c.Samples); i++ {
-			result = append(result, c.TMRCA)
+		for _, subclade := range c.Subclades {
+			subclade.appendTMRCAs(&result)
 		}
 	}
 	return result
@@ -67,12 +67,12 @@ func (c *Clade) TMRCAs() []float64 {
 // from this clade to the result.
 func (c *Clade) appendTMRCAs(result *[]float64) {
 	if c.TMRCA != 0 {
-		for _, subclade := range c.Subclades {
+		branches := len(c.Subclades) + len(c.Samples)
+		for i := 0; i < branches-1; i++ {
 			*result = append(*result, c.TMRCA)
-			subclade.appendTMRCAs(result)
 		}
-		for i := 0; i < len(c.Samples); i++ {
-			*result = append(*result, c.TMRCA)
+		for _, subclade := range c.Subclades {
+			subclade.appendTMRCAs(result)
 		}
 	}
 }
@@ -143,17 +143,17 @@ func (c *Clade) String() string {
 }
 
 // Subclade returns the subclade that contains searchTerm.
-func (c *Clade) Subclade(searchTerm string) *Clade {
+func (c *Clade) Subclade(cladeName string) *Clade {
 	var result *Clade
-	if strings.Contains(c.Text, searchTerm) {
+	if c.contains(cladeName) {
 		result = c
-	} else if c.Subclades != nil {
+	} else {
 		for i, _ := range c.Subclades {
-			if strings.Contains(c.Subclades[i].Text, searchTerm) {
+			if c.Subclades[i].contains(cladeName) {
 				result = &c.Subclades[i]
 				break
 			} else {
-				result = c.Subclades[i].Subclade(searchTerm)
+				result = c.Subclades[i].Subclade(cladeName)
 				if result != nil {
 					break
 				}
@@ -161,6 +161,26 @@ func (c *Clade) Subclade(searchTerm string) *Clade {
 		}
 	}
 	return result
+}
+
+// contains checks if the text representation of this clade
+// contains cladeName.
+// The method only returns true if the found cladeName is
+// terminated by a non digit. This should make sure that the
+// found cladeName is not part of a longer SNP name.
+func (c *Clade) contains(cladeName string) bool {
+	idx := strings.Index(c.Text, cladeName)
+	if idx >= 0 {
+		// Check if the search term is terminated or part of a longer SNP name.
+		termIdx := idx + len(cladeName)
+		if termIdx < len(c.Text) && unicode.IsDigit(rune(c.Text[termIdx])) {
+			// Search term is part of longer SNP name.
+			return false
+		} else {
+			return true
+		}
+	}
+	return false
 }
 
 // prettyPrint prints a formatted version of the clade c
