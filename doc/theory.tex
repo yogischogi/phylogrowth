@@ -20,4 +20,69 @@ P:   & population size
 If we detect all male lineages, for example, the population
 size would be about twice as much.
 
+How does population size change with time? If we look after a
+short period of time we may take the old population size, add
+the number of births and subtract the number of deaths.
+
+\begin{equation}
+P(t+dt) = P(t) + b(t)dt - d(t)dt 
+\end{equation}
+
+\begin{tabular}{ll}
+$P$: & population size\\
+$b$: & number of births per second\\
+$d$: & number of deaths per second\\
+$t$: &time
+\end{tabular}
+\vspace{1em}
+
+The probability of a mutation is the same for all newborn
+babies. This means the number of newly appearing mutations
+and lineages within a period of time scales with the number
+of births within that period. Thus we are interested in the
+number of births and rewrite the previous formula as
+
+\begin{equation}
+b(t)dt = P(t+dt) - P(t) + d(t)dt
+\end{equation}
+
+or
+
+\begin{eqnarray}
+b(t) & = & \frac{P(t+dt)- P(t)}{dt} + d(t)\\
+     & = & \frac{dP(t)}{dt} + d(t) \label{births-per-second}
+\end{eqnarray}
+
+As an easy model let us assume that the number of deaths
+per second is proportional to the total population size.
+In this case the following equation holds:
+
+\begin{equation}
+d(t) = c_{d} P(t)
+\end{equation}
+
+\begin{tabular}{ll}
+$d$:     & number of deaths per second\\
+$P$:     & population size\\
+$c_{d}$: & constant
+\end{tabular}
+\vspace{1em}
+
+Under this assumption we can rewrite \ref{births-per-second}
+as
+
+\begin{equation}
+b(t) = \frac{dP(t)}{dt} + c_{d} P(t)
+\end{equation}
+
+This means that the number of births per second depends on
+two terms, the population growth and the population size.
+
+
+
+
+
+
+
+
 
