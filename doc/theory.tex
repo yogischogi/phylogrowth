@@ -1,5 +1,7 @@
 \section{Theory}
 
+\subsection{Population Growth}
+
 Let us assume that we have a closed population and take a
 number of genetic samples. We analyse the samples and get
 different genetic lineages as a result.
@@ -68,17 +70,61 @@ $c_{d}$: & constant
 \end{tabular}
 \vspace{1em}
 
-Under this assumption we can rewrite \ref{births-per-second}
+Under this assumption we can rewrite equation \ref{births-per-second}
 as
 
 \begin{equation}
 b(t) = \frac{dP(t)}{dt} + c_{d} P(t)
+\label{births-per-second-final}
 \end{equation}
 
 This means that the number of births per second depends on
 two terms, the population growth and the population size.
 
 
+\subsection{Measurement of Phylogenetic Growth}
+
+We can not measure the number of births for every point in
+history directly. We can only look at a phylogenetic tree
+and examine how the number of lineages increases with time.
+
+Let us assume that a fraction $c_l$ of all births develops
+into lineages that are still on the phylogenetic tree today.
+If we try to count these lineages we can count all new lineages
+on the phylogenetic tree between to points in time.
+
+\begin{equation}
+g(t) = c_l \int\limits_{t-\frac{a}{2}}^{t+\frac{a}{2}} b(t) dt
+\end{equation}
+
+If we substitute $b(t)$ with equation \ref{births-per-second-final}
+we get
+
+\begin{equation}
+g(t) = c_l \int\limits_{t-\frac{a}{2}}^{t+\frac{a}{2}} \frac{dP(t)}{dt} + c_{d} P(t) dt
+\end{equation}
+
+\begin{tabular}{ll}
+$g$:     & growth of phylogenetic lineages between $t-\frac{a}{2}$ and $t+\frac{a}{2}$\\
+$a$:     & time interval or step length used for counting\\
+$c_l$:   & fraction of births that develops into long time lineages\\
+$P$:     & population size\\
+$c_{d}$: & fraction of the population size that dies per second
+\end{tabular}
+\vspace{1em}
+
+For practical purposes we assume that the measurement time
+interval $a$ is small compared to the time it takes for any
+significant population changes. Then we may write the previous
+equation as
+
+\begin{equation}
+g(t) \approx c_l a \frac{dP(t)}{dt} + c_{d} P(t)
+\end{equation}
+
+This means that the measured increase in phylogenetic lineages
+at any given time is roughly proportional to the number of births
+at that time and this depends on population size and growth.
 
 
 
