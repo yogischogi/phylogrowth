@@ -136,10 +136,16 @@ it's SNP mutation we will find this mutation whenever a person
 belonging to the SNP subclade has tested. Thus the probability
 to detect a certain SNP scales with the number of persons
 carrying it. For simplicity we assume that all subclades grow
-equally with population growth. In this case we can write:
+equally with population growth.
+
+If the fraction $c_t$ of the population that has tested is
+very small, we will miss most of the younger lineages. The
+older ones however will be amplified by the number of their
+sublineages and thus population growth.
+In this case we may write:
 
 \begin{eqnarray}
-d(t) & =       & c_t \frac{P(t_0)}{P(t)} g(t)\\
+d(t) & \approx & c_t \frac{P(t_0)}{P(t)} g(t)\\
      & \approx & c_t \frac{P(t_0)}{P(t)} c_l a b(t) \\
      & \approx & c_t \frac{P(t_0)}{P(t)} c_l a \left( \frac{dP(t)}{dt} + c_{d} P(t) \right)
 \end{eqnarray}
