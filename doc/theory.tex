@@ -119,12 +119,48 @@ significant population changes. Then we may write the previous
 equation as
 
 \begin{equation}
-g(t) \approx c_l a \frac{dP(t)}{dt} + c_{d} P(t)
+g(t) \approx c_l a \left( \frac{dP(t)}{dt} + c_{d} P(t) \right) \label{phylogrowth}
 \end{equation}
 
 This means that the measured increase in phylogenetic lineages
 at any given time is roughly proportional to the number of births
 at that time and this depends on population size and growth.
+
+Equation \ref{phylogrowth} is only valid for complete phylogenetic
+trees. In reality we have to take into account that only a fraction
+$c_t$ of the population has tested.
+
+Furthermore the probability to detect a certain lineage depends
+on it's age. If we characterize a specific historic lineage by
+it's SNP mutation we will find this mutation whenever a person
+belonging to the SNP subclade has tested. Thus the probability
+to detect a certain SNP scales with the number of persons
+carrying it. For simplicity we assume that all subclades grow
+equally with population growth. In this case we can write:
+
+\begin{eqnarray}
+d(t) & =       & c_t \frac{P(t_0)}{P(t)} g(t)\\
+     & \approx & c_t \frac{P(t_0)}{P(t)} c_l a b(t) \\
+     & \approx & c_t \frac{P(t_0)}{P(t)} c_l a \left( \frac{dP(t)}{dt} + c_{d} P(t) \right)
+\end{eqnarray}
+
+\begin{tabular}{ll}
+$d$:     & detected number of new lineages between $t-\frac{a}{2}$ and $t+\frac{a}{2}$\\
+$c_t$:   & fraction of the population that has tested.\\
+$P$:     & population size\\
+$t$:     & time\\
+$t_0$:   & time of testing\\
+$g$:     & growth of phylogenetic lineages between $t-\frac{a}{2}$ and $t+\frac{a}{2}$\\
+$b$:     & number of births per second\\
+$a$:     & time interval or step length used for counting\\
+$c_l$:   & fraction of births that develops into long time lineages\\
+$c_{d}$: & fraction of the population size that dies per second
+\end{tabular}
+\vspace{1em}
+
+
+
+
 
 
 
