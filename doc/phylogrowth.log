@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.20)  30 JUN 2016 14:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.20)  2 JUL 2016 20:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -782,8 +782,8 @@ Package rerunfilecheck Info: File `phylogrowth.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 35.
  ) 
 Here is how much of TeX's memory you used:
- 9629 strings out of 494469
- 131252 string characters out of 6171578
+ 9628 strings out of 494469
+ 131239 string characters out of 6171578
  197923 words of memory out of 5000000
  12704 multiletter control sequences out of 15000+600000
  10126 words of font info for 34 fonts, out of 8000000 for 9000
@@ -802,10 +802,10 @@ msfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on phylogrowth.pdf (12 pages, 166563 bytes).
+Output written on phylogrowth.pdf (12 pages, 165292 bytes).
 PDF statistics:
- 235 PDF objects out of 1000 (max. 8388607)
- 192 compressed objects within 2 object streams
- 51 named destinations out of 1000 (max. 500000)
+ 234 PDF objects out of 1000 (max. 8388607)
+ 191 compressed objects within 2 object streams
+ 50 named destinations out of 1000 (max. 500000)
  91 words of extra memory for PDF output out of 10000 (max. 10000000)
 
