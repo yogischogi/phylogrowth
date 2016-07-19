@@ -1,0 +1,75 @@
+\section{Appendix: Probability to Detect K Samples}
+
+Let us assume we are trying to detect a specific haplogroup
+within a population of N individuals. The haplogroup itself
+is represented by K individuals. How big is the probability
+to detect one of the K haplogroup members with S samples?
+
+For a single sample the answer is easy:
+
+\begin{equation}
+p(1) = \frac{K}{N}
+\end{equation}
+
+And the probability, not to detect one of the K individuals
+is
+
+\begin{equation}
+\tilde{p}(1) = \frac{N-K}{N}
+\end{equation}
+
+\begin{tabular}{ll}
+$p(S)$         & probability to detect K with S samples\\
+$\tilde{p}(S)$ & probability not to detect K with S samples\\
+$N$: & number of individuals\\
+$K$: & number of persons to detect\\
+$S$: & number of samples
+\end{tabular}
+\vspace{1em}
+
+Suppose our single sample test did not yield a positive result and
+we try a second time. The previously tested individual
+does not count anymore. So we must subtract one from the number
+of individuals and one from the number of individuals who are 
+not a member of our haplogroup. Thus the probability not to detect
+one of the K individuals the second time is
+
+\begin{equation}
+\tilde{p} = \frac{N-K-1}{N-1}
+\end{equation}
+
+The maximum number of failures is $N-K$ because then only bearers
+of the haplogroup we are looking for are left and the next test
+will definitely a success.
+
+To calculate the total probability of S failures we can multiply
+the probabilities of failure for each single try.
+
+\begin{eqnarray}
+\tilde{p}(S) & = & \prod^{S-1}_{i=0} \tilde{p}_i\\
+             & = & \prod^{S-1}_{i=0} \frac{N-K-i}{N-i}\\
+             & = & \frac{(N-K)! / (N-K-S)!}{N! / (N-S)!}\\
+             & = & \frac{(N-K)! (N-S)!}{N! (N-K-S)!}
+\end{eqnarray}
+
+
+Because the total probability must always be one, the probability
+to detect K individuals with S samples is
+
+\begin{eqnarray}
+p(S) & = & 1 -\tilde{p}(S)\\
+     & = & 1 - \frac{(N-K)! (N-S)!}{N! (N-K-S)!}
+\end{eqnarray}
+
+
+
+
+
+
+
+
+
+
+
+
+
