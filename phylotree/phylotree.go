@@ -16,13 +16,32 @@ import (
 type Sample struct {
 	// Text is the text line used in the text representation of the tree.
 	Text string
+	ID   string
+}
+
+// newSample creates a new Sample from a textual representation.
+func newSample(text string) (Sample, error) {
+	result := Sample{Text: text}
+	IDidx := strings.Index(text, "id:")
+	IDidx += 3
+	if IDidx > len([]rune(text)) {
+		return result, errors.New(fmt.Sprintf("could not parse sample: %s", text))
+	}
+	result.ID = extractID(text[IDidx:])
+	return result, nil
+}
+
+func (s *Sample) String() string {
+	return fmt.Sprintf("id:%s", s.ID)
 }
 
 // Clade represents a phylogenetic clade.
 type Clade struct {
 	// Text is the text line used in the text representation of the tree.
-	Text      string
-	TMRCA     float64
+	Text  string
+	TMRCA float64
+	// SNP is the name of the first SNP that characterizes this clade.
+	SNP       string
 	Subclades []Clade
 	Samples   []Sample
 }
@@ -30,6 +49,16 @@ type Clade struct {
 // newClade creates a new Clade from a textual representation.
 func newClade(text string) (Clade, error) {
 	result := Clade{Text: text}
+
+	// Find SNP name.
+	txt := strings.TrimSpace(text)
+	SNPIdx := strings.Index(txt, "-")
+	if SNPIdx == -1 {
+		SNPIdx = 0
+	}
+	result.SNP = extractID(txt[SNPIdx:])
+
+	// Search for TMRCA.
 	tmrcaIdx := strings.Index(text, "TMRCA")
 	if tmrcaIdx >= 0 && len(text) > tmrcaIdx+6 {
 		tmrcaPart := text[tmrcaIdx+6:]
@@ -190,15 +219,14 @@ func (c *Clade) prettyPrint(buffer *bytes.Buffer, indent int) {
 	for i := 0; i < indent; i++ {
 		buffer.WriteString("\t")
 	}
-	buffer.WriteString(c.Text)
-	buffer.WriteString("\r\n")
+	buffer.WriteString(fmt.Sprintf("%s, TMRCA: %.0f\r\n", c.SNP, c.TMRCA))
 
 	// Write Samples.
 	for _, sample := range c.Samples {
 		for i := 0; i < indent+1; i++ {
 			buffer.WriteString("\t")
 		}
-		buffer.WriteString(sample.Text)
+		buffer.WriteString(sample.String())
 		buffer.WriteString("\r\n")
 	}
 	// Write Subclades.
@@ -232,7 +260,12 @@ func parseTree(parent *Clade, indent int, lines []lineInfo) error {
 		case lines[i].indent == childIndent:
 			// Parse child elements.
 			if strings.Contains(lines[i].text, "id:") {
-				parent.AddSample(Sample{Text: lines[i].text})
+				sample, err := newSample(lines[i].text)
+				if err != nil {
+					msg := fmt.Sprintf("line: %d, %s", lines[i].lineNo, err)
+					return errors.New(msg)
+				}
+				parent.AddSample(sample)
 			} else {
 				// Child is Clade element.
 				clade, err := newClade(lines[i].text)
@@ -299,6 +332,30 @@ func stripComments(line string) string {
 	} else {
 		return result
 	}
+}
+
+// extractID extracts the first ID from a line of text.
+// An ID starts with one or more letters and ends with one or more digits.
+func extractID(text string) string {
+	var buffer bytes.Buffer
+	startLetters := false
+	startDigits := false
+	for _, c := range text {
+		isDigit := unicode.IsDigit(c)
+		isLetter := unicode.IsLetter(c)
+		if startLetters == false && !isLetter {
+			continue
+		} else if isDigit {
+			startDigits = true
+			buffer.WriteRune(c)
+		} else if isLetter && startDigits == false {
+			startLetters = true
+			buffer.WriteRune(c)
+		} else {
+			break
+		}
+	}
+	return buffer.String()
 }
 
 // countSpaces counts the white spaces at the beginning
