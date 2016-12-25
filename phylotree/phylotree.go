@@ -49,14 +49,7 @@ type Clade struct {
 // newClade creates a new Clade from a textual representation.
 func newClade(text string) (Clade, error) {
 	result := Clade{Text: text}
-
-	// Find SNP name.
-	txt := strings.TrimSpace(text)
-	SNPIdx := strings.Index(txt, "-")
-	if SNPIdx == -1 {
-		SNPIdx = 0
-	}
-	result.SNP = extractID(txt[SNPIdx:])
+	result.SNP = extractID(text)
 
 	// Search for TMRCA.
 	tmrcaIdx := strings.Index(text, "TMRCA")
